@@ -1,0 +1,84 @@
+<!--
+Copyright 2011 Exavideo LLC.
+
+This file is part of Exadeck.
+
+Exadeck is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Exadeck is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Exadeck.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<html>
+    <head>
+        <script src="js/jquery-1.6.2.min.js"></script>
+        <script src="js/jquery-ui-1.8.15.custom.min.js"></script>
+        <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.15.custom.css" />
+        <script src="process_control.js"></script>
+
+        <title>Exavideo Recording Server Beta</title>
+
+        <style type="text/css">
+            body {
+                font-family: sans-serif;
+                background-image:url(ExavideoSemitransparent.png);
+                background-repeat:no-repeat;
+                background-position: bottom right;
+            }
+
+            .processProto {
+                display: none;
+            }
+
+            .process {
+                float: left;
+                width: 300px;
+            }
+
+            .processRunning {
+                background-color:rgba(0,255,0,0.3);
+            }
+
+            .processStopped {
+                background-color:rgba(255,0,0,0.3);
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div id="container">
+
+        </div>
+
+        <div class="processProto"> 
+            <p>
+                <button id="start">Start</button>
+                <button id="stop">Stop</button>
+            </p>
+            <p>
+            <p>
+                Command:
+                <input type="text" id="command">
+            </p>
+            <table>
+                <tr><td>Run Time</td><td id="time"></td></tr>
+                <tr><td>Bitrate</td><td id="bitrate"></td></tr>
+                <tr><td>Size</td><td id="size"></td></tr>
+                <tr><td>Frames/Sec</td><td id="fps"></td></tr>
+                <tr><td>Frames</td><td id="frames_encoded"></td></tr>
+            </table>
+        </div>
+
+    </body>
+
+</html>

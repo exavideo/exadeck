@@ -1,19 +1,19 @@
 # Copyright 2011 Exavideo LLC.
 # 
-# This file is part of Exaboard.
+# This file is part of Exadeck.
 # 
-# Exaboard is free software: you can redistribute it and/or modify
+# Exadeck is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # 
-# Exaboard is distributed in the hope that it will be useful,
+# Exadeck is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # 
 # You should have received a copy of the GNU General Public License
-# along with Exaboard.  If not, see <http://www.gnu.org/licenses/>.
+# along with Exadeck.  If not, see <http://www.gnu.org/licenses/>.
 
 class Subprocess
     def start
@@ -42,6 +42,7 @@ class Subprocess
         else
             @pid = pid
             @exited = nil
+            @status = nil
             Thread.new { process_input(pread_stdout, stdout_filters) }
             Thread.new { process_input(pread_stderr, stderr_filters) }
         end
@@ -198,7 +199,6 @@ class Subprocess
         p myproc_fields
 
         myproc_total_cpu = myproc_fields[15].to_i + myproc_fields[16].to_i 
-        puts "cpu this process=#{myproc_total_cpu}"
         cpuline = ''
         global_stats.each do |line|
             if line =~ /cpu\s/

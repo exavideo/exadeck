@@ -1,19 +1,19 @@
 # Copyright 2011 Exavideo LLC.
 # 
-# This file is part of Exaboard.
+# This file is part of Exadeck.
 # 
-# Exaboard is free software: you can redistribute it and/or modify
+# Exadeck is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 # 
-# Exaboard is distributed in the hope that it will be useful,
+# Exadeck is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 # 
 # You should have received a copy of the GNU General Public License
-# along with Exaboard.  If not, see <http://www.gnu.org/licenses/>.
+# along with Exadeck.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'patchbay'
 require 'json'
@@ -60,6 +60,10 @@ class ProcessControlApp < Patchbay
         render :json => (@processes.map { |x| x.json_status }).to_json
     end
 
+    get '/process/:id' do
+        render :json => @processes[params[:id].to_i].json_status.to_json
+    end
+
     put '/process/:id/start' do
         pr = @processes[params[:id].to_i]
         pr.start
@@ -92,6 +96,8 @@ class ProcessControlApp < Patchbay
     end
 
     attr_accessor :processes
+
+    self.files_dir = 'public_html'
 end
 
 app = ProcessControlApp.new
