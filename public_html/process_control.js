@@ -53,6 +53,7 @@ $.fn.updateProcess = function() {
 $.fn.loadData = function(data) {
     $(this).find("#command").val(data.cmd);
 
+    $(this).find("#title").text(data.title);
     $(this).find("#time").text(data.time);
     $(this).find("#bitrate").text(data.bitrate);
     $(this).find("#size").text(data.size);

@@ -20,6 +20,11 @@ require 'json'
 require_relative 'subprocess'
 
 class FfmpegSubprocess < Subprocess
+    def initialize(title=nil)
+        @title = title
+        super
+    end
+        
     stderr /frame=\s*(\d+)/ do |match|
         @frames_encoded = match[1]
     end
@@ -41,6 +46,7 @@ class FfmpegSubprocess < Subprocess
     end
 
     attr_reader :frames, :fps, :size, :time, :bitrate
+    attr_accessor :title
 
     cmd 'ffmpeg -i /home/armena/openreplay2/test.mjpg -f rawvideo -s 1920x1080 - >/dev/null'
 
@@ -50,7 +56,8 @@ class FfmpegSubprocess < Subprocess
             :bitrate => @bitrate,
             :size => @size,
             :fps => @fps,
-            :frames_encoded => @frames_encoded
+            :frames_encoded => @frames_encoded,
+            :title => @title
         }.merge(super)
     end
 end
@@ -101,6 +108,6 @@ class ProcessControlApp < Patchbay
 end
 
 app = ProcessControlApp.new
-app.processes = [ FfmpegSubprocess.new ]
+app.processes = [ FfmpegSubprocess.new('Program'), FfmpegSubprocess.new('Multiviewer') ]
 app.run
 
